@@ -1,5 +1,6 @@
 {% extends "workbench/base.html" %}
 {% block content %}
+{% if user.is_authenticated %}
     {% for post in posts %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
@@ -13,6 +14,9 @@
           </div>
         </article>
     {% endfor %}
+{% else %}
+<h1>Login or SignUp to view content.</h1>
+{% endif %}
     {% if is_paginated %}
 
       {% if page_obj.has_previous %}
