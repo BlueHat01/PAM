@@ -1,7 +1,17 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.conf import settings
 from django.contrib import messages
+from django.core.mail import send_mail
+
+
+
+
+
+
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render,redirect
+
+
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
@@ -10,6 +20,15 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user.save()
+            #send_mail(sub,mes,from_email,to_lost,fail_silently=True)    
+            subject = "Registration Done"
+            message = "WELCOME TO THE TEAM"
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [user.email, settings.EMAIL_HOST_USER]
+            send_mail(subject,message,from_email,to_list,fail_silently=False)
+            
+
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
