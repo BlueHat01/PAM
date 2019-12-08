@@ -13,9 +13,19 @@
                   <button class="btm btn-outline-info" type="submit">Log In</button>
               </div>
           </form>
+          <div class="row" style="margin-bottom:30px;">
+                  <div class="col-sm-5">
+                  <img src="captcha.php" id="captcha_image"/>
+                  <br/> <a id="captcha_reload" href="#">reload</a>
+                  </div>
+                  <div class="col-sm-6">
+                  <label>Enter the code from the image here:</label>
+                  <input type="text" class="form-control" required id="captcha" name="captcha" >
+                  </div>
+                </div>
           <div class="border-top pt-3">
               <small class="text-muted">
-                  <!--New User? <a class="ml-2" href="{% url 'login' %}">Sign Up Now</a> -->
+                  New User?<a class="ml-2" href="{% url 'login' %}">Sign Up Now</a>
               </small>
           </div>
       </div>
